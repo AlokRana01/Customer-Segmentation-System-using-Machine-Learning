@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Segmentation</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: #f5f6fa;
+            margin: 0;
+        }
+
+        .wrapper {
+            max-width: 420px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: #2f3640;
+        }
+
+        p.subtitle {
+            text-align: center;
+            font-size: 13px;
+            color: #718093;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 13px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0 15px 0;
+            border: 1px solid #dcdde1;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4078c0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #2f3640;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1e272e;
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f1f2f6;
+            border-radius: 6px;
+            font-size: 14px;
+            text-align: center;
+            color: #2f3640;
+        }
+
+        .graph {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <h1>Customer Segmentation</h1>
+    <p class="subtitle">K-Means based customer grouping</p>
+
+    <div class="card">
+
+        <form action="/predict" method="post">
+
+            <label>Annual Income (₹)</label>
+            <input type="number" name="income" placeholder="e.g. 800000" required>
+
+            <label>Spending Score (1–100)</label>
+            <input type="number" name="score" placeholder="e.g. 65" required>
+
+            <button type="submit">Predict Segment</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="result">
+                {{ prediction_text }}
+            </div>
+        {% endif %}
+
+        {% if plot_url %}
+            <div class="graph">
+                <img src="data:image/png;base64,{{ plot_url }}" width="280">
+            </div>
+        {% endif %}
+
+    </div>
+
+    <footer>
+        😊 Project by Alok Rana 
+    </footer>
+
+</div>
+
+</body>
+</html>
